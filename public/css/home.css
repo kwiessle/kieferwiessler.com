@@ -1,0 +1,90 @@
+.section {
+    width: 100%;
+    height: 700px;
+    /* background: #252525; */
+    font-size: 15px;
+    margin: 0;
+}
+
+.section-profile {
+    background-image: url("http://localhost:9999/img/profile.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.profile-edito {
+    position: absolute;
+
+    bottom: 50px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+    width: 230px;
+    color: white;
+    font-weight: 100;
+}
+
+.profile-name {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 35px;
+}
+
+.profile-skill {
+    border: 1px solid red;
+    width: 70px;
+    color: red;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.section-resume {
+    color: white;
+    /* min-height: 400px; */
+    height: inherit;
+    font-size: 0;
+    margin-top: 10px;
+}
+
+.resume-pannel {
+    display: inline-block;
+    width: calc(50% - 5px);
+    background: #222222;
+    vertical-align: top;
+    padding-bottom: 50px;
+    min-height: 400px;
+}
+
+.resume-bio {
+    width: 80%;
+    text-align: justify;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.left-pannel {
+    margin-right: 5px;
+}
+
+.right-pannel {
+    margin-left: 5px;
+}
+
+.section-social {
+    background: #222222;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+    .resume-pannel {
+        display: block;
+        width: 100%;
+        margin: 0;
+        height: calc(50% - 10px)
+    }
+}
