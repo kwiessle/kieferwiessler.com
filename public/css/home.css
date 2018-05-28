@@ -7,8 +7,8 @@
 }
 
 .section-profile {
-    /* background-image: url("http://localhost:9999/img/kiefer.jpg"); */
-    background-image: url("http://192.168.1.7:9999/img/kiefer.jpg");
+    background-image: url("http://localhost:9999/img/kiefer.jpg");
+    /* background-image: url("http://192.168.1.7:9999/img/kiefer.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -83,7 +83,7 @@
 
 .contact-band i:hover {
     transition-duration: .8s;
-    transform: rotate(360deg) scale(1.3);
+    transform: scale(1.3);
     background: transparent;
     color: #ff6060;
     border: 1px solid #fff;
@@ -100,33 +100,152 @@
 .resume-pannel {
     display: inline-block;
     width: calc(50% - 5px);
-    background: #070707;
+    background: #151515;
     vertical-align: top;
     padding-bottom: 50px;
-    min-height: 400px;
+    min-height: 590px;
+    font-size: 17px;
+    font-weight: 300;
+    color: #adadad;
+}
+
+
+
+.skill-list {
+    /* background: blue; */
+    /* width: 200px; */
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    margin: 25px;
+
+}
+
+.skill-item:before {
+    content: "•";
+    font-size: 20px;
+    color: #696969;
+    position: relative;
+    right: 5px;
+}
+
+.skill-domain {
+    font-size: 20px;
+    color: #151515;
+    font-weight: 400;
+    background: #ff6060;
+    letter-spacing: -1px;
+    text-align: center;
+    border-radius: 5px;
+    padding:3px;
+    margin-bottom: 20px;
 }
 
 .resume-bio {
     width: 80%;
+    padding-top: 20px;
     text-align: justify;
-    font-weight: 300;
-    font-size: 17px;
+
+    /* font-size: 17px; */
     /* letter-spacing: 1px; */
-    color: #7d7d7d;
+
 }
 
 .left-pannel {
     margin-right: 5px;
+    border-top-left-radius: 100px;
 }
 
 .right-pannel {
     margin-left: 5px;
+    border-bottom-right-radius: 100px;
 }
 
-.section-social {
-    background: #222222;
-    margin-top: 10px;
+
+.section-timeline {
+    position: relative;
+    /* background: red; */
+    height: inherit;
 }
+
+.timeline-branch {
+    height: 820px;
+    width: 2px;
+    left: 0;
+    right: 0;
+    top: -5px;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    background: #696969;
+    z-index: -1;
+}
+
+.timeline-item {
+    background: black;
+    z-index: 100;
+    border: 2px solid #696969;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.timeline-item img {
+    height: 35px;
+    width: 35px;
+    vertical-align: middle;
+}
+
+.timeline-img-fix {
+    transform: scale(1.5);
+}
+
+
+
+.timeline-block {
+    width: 400px;
+    height: 200px;
+    background: #151515;
+    position: relative;
+    bottom: 70px;
+    border-radius: 10px;
+}
+
+.block-left {
+    right: 270px;
+}
+
+.block-left::after {
+    content: "";
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-left: 15px solid #ff6060;
+	border-bottom: 10px solid transparent;
+    right: -15px;
+    top: 25px;
+}
+
+
+.block-right {
+    left: 270px;
+}
+
+.block-right::after {
+    content: "";
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-right: 15px solid #ff6060;
+	border-bottom: 10px solid transparent;
+    left: -15px;
+    top: 25px;
+}
+
 
 @media only screen and (max-width: 900px) {
     .resume-pannel {
