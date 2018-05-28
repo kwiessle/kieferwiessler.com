@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #151515;
+    background: #000;
     font-size: 0;
     font-family: 'Work Sans', sans-serif;
 }
@@ -18,7 +18,7 @@ h1 {
     font-size: 40px;
     padding-top: 50px;
     padding-left: 40px;
-    color: red;
+    color: #ff6060;
     width: calc(100% - 40px);
     text-align: left;
 }
@@ -36,6 +36,7 @@ h1 {
     height: 60px;
     width: 100%;
     background: #181818;
+    background: rgba(18, 18, 18, 0.9);
     text-align: right;
     font-size: 17px;
     font-weight: 200;
@@ -45,19 +46,20 @@ h1 {
 
 .menu-cell {
     height: 60px;
-    width: 100px;
+    /* width: 100px; */
     line-height: 60px;
     /* background: green; */
     position: relative;
     /* text-align: center; */
     display: inline-block;
+    margin-right: 30px;
 
 }
 
 .menu-cell a {
     display: block;
     height: 60px;
-    width: 100px;
+    /* width: 100px; */
 }
 
 .menu-cell a:before {
@@ -65,7 +67,7 @@ h1 {
     height: 2px;
     position: absolute;
     /* width: 80px; */
-    background: red;
+    background: #ff6060;
     bottom: 12px;
     width: 0;
     /* left: 10px;
@@ -75,12 +77,12 @@ h1 {
 
 .menu-cell a:hover:before {
     transition-duration: .6s;
-    width: 80px;
+    width: 100%;
     opacity: 1;
 }
 
 .menu-cell a:hover {
-    color: red;
+    color: #ff6060;
 }
 
 .menu-cell:last-child {
