@@ -15,7 +15,9 @@ app.use(express.static('public'))
 //Controllers
 
 const home = require('./Controllers/Home.js')
+const zdkit = require('./Controllers/ZDKit.js')
 app.get('/', home)
+app.get('/zdkit', zdkit)
 
 
 

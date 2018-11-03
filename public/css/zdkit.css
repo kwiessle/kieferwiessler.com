@@ -1,0 +1,258 @@
+
+
+body {
+	background: white;
+	margin: 0;
+	padding: 0;
+}
+#zdkit {
+	height: 60%;
+	max-height: 350px;
+	position: absolute;
+	top: -40px;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	margin: auto;
+}
+.header {
+	background: #c7dbd9;
+	position: relative;
+	max-width: inherit;
+	margin: 0;
+	height: 725px;
+}
+
+.header .link {
+	position: relative;
+	top: 750px;
+	padding:  30px;
+	/* background: red; */
+}
+
+.menu-cell a:before {
+    content: "";
+    height: 2px;
+    position: absolute;
+    background: #60b7ff;
+    bottom: 12px;
+    width: 0;
+    opacity: 0;
+}
+.menu-cell a:hover {
+    color: #60b7ff;
+}
+
+.version {
+	width: 100%;
+	height: 30px;
+	position: absolute;
+	bottom: 80px;
+	font-size: 20px;
+	color: white;
+}
+b, h1 {
+	font-weight: 500;
+	color: #454545;
+	/* font-size: 30px; */
+}
+
+h1 i {
+	/* color: #cdd0e0; */
+	color: #505575;
+}
+
+h1 {
+	color: #898d9d;
+	width: 100%;
+	font-size: 44px;
+	height: 50px;
+	letter-spacing: -4px;
+}
+
+h4 {
+	color: #51535b;
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 30px;
+	font-weight: 400;
+	letter-spacing: -2px;
+}
+
+h4 b {
+	color: #949bc6;
+}
+
+.section-install {
+	height: auto;
+	padding-top: 100px;
+	padding-bottom: 250px;
+	margin-bottom: 100px;
+	background-image: url("https://kieferwiessler.com/img/install.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+	top: -190px;
+}
+
+.section-install div, .section-install h1 {
+	position: relative;
+	top: 440px;
+}
+
+
+
+.section-documentation {
+	text-align: left;
+	position: relative;
+	max-width: inherit;
+	width: 90%;
+	height: auto;
+	border-radius: 20px;
+	background: #fff;
+	box-shadow:  0px 0px 10px 1px rgba(0,0,0,0.2);
+	/* border: 1px solid rgba(255, 255, 255, 0.3); */
+	z-index: 10;
+}
+
+.section-source {
+	margin-top: 100px;
+	height: auto;
+	margin-bottom: 200px;
+}
+
+pre {
+	background: #22263d;
+	border: none !important;
+	padding-right:  1% !important;
+	padding-left:  5% !important;
+	width: 94%;
+	font-size: 15px;
+	text-align: left;
+	overflow-x: scroll;
+	white-space: pre-line;
+	margin: 0;
+	box-shadow: inset 0px 0px 60px 12px rgba(0,0,0,0.6);
+}
+
+.text {
+	display: inline-block;
+	font-weight: 300;
+	color: #080808;
+	font-size: 19px;
+	padding-top: 40px;
+	margin: 20px;
+}
+
+.text-grand {
+	font-size: 27px;
+	text-align: center;
+}
+
+.explaination:first-child {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+pre:last-child {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.explaination {
+	width: 90%;
+	background: #eee;
+	/* background: #c7dbd9; */
+	/* background: #c7cbd9; */
+	padding: 5%;
+	font-weight: 300;
+	color: #080808;
+	font-size: 20px;
+	text-align: left;
+}
+
+.explaination-small {
+	width: 130px;
+	padding: 10px;
+	height: 20px;
+	line-height: 20px;
+	display: inline-block;
+	margin-left: 10px;
+	text-align: center;
+	background-color: #f4efef;
+	border-radius: 5px;
+	box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.1);
+	border: 1px solid #fff;
+}
+
+.link {
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 20px;
+}
+
+.link img {
+	filter: grayscale(1);
+}
+
+.cocoapods img {
+	height: 60px;
+	transition-duration: .3s
+}
+
+.github {
+	height: 30px;
+	line-height: 30px;
+}
+
+.github img {
+	height: 30px;
+}
+
+.link:hover img {
+	filter: grayscale(0);
+	transform: scale(1.05);
+	transition-duration: .3s
+}
+
+.red {
+	display: inline-block;
+	color: #e36060;
+	margin-left: 10px;
+}
+
+
+
+.kwd, .lit {
+	color: #a45bab !important;
+}
+
+.typ {
+	color: #578fd1 !important;
+}
+
+.pln {
+	color: #afafaf !important;
+}
+
+.com, .pun {
+	color: #696969;
+}
+
+.str {
+	color: #32ac58;
+}
+
+.footer {
+	background: #fff;
+	border-top: 1px solid #d2d2d2;
+	/* border: none; */
+}
+
+.footer a {
+	color: #6e707c;
+}

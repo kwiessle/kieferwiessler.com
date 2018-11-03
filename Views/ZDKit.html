@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,400" rel="stylesheet">
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script src="/js/swift.js"></script>
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/zdkit.css" />
+	<link rel="icon" href="https://kieferwiessler.com/img/zdkit1.png" />
+    <title>ZDKit</title>
+</head>
+
+<body>
+    <div class="site-container" align="center">
+        <div class="menu">
+			<img id="logo" src="https://kieferwiessler.com/img/zd.png" />
+			<div class="menu-cell install"><a href="#">Install</a></div>
+            <div class="menu-cell getstarted"><a href="#">Get Started</a></div>
+            <div class="menu-cell source"><a href="#">Source</a></div>
+
+        </div>
+		<div class="header">
+				<img id="zdkit" src="https://kieferwiessler.com/img/zdkit.png">
+		</div>
+		<div class="section section-install">
+			<h1><i class="fas fa-wrench"></i> Install</h1>
+			<center>
+				<div class="text text-grand">
+					ZDKit is a framework wich simplify the queries between your API and your iOS App.<br>
+					Sending & Fetching JSON has never been so easy.
+				</div>
+			</center>
+			<div class="text">
+				ZDKit is available through CocoaPods. To install
+				it, simply add the following line to your Podfile:
+			</div>
+			<div class="explaination explaination-small">
+				pod <b>'ZDKit'</b>
+			</div>
+			<div class="text">
+				ZDKit is powered by Swift 4.2 so ensure that your deployment target is at least '12.0' in your podfile.
+			</div>
+		</div>
+	<div class="page-container">
+
+		<div class="section section-documentation">
+			<center>
+
+
+				<div class="explaination">
+					<h1><i class="fas fa-heartbeat"></i> Get Started</h1>
+					<h4><b>Step 1 :</b> Create a Model </h4>
+					First Create a struct or a class corresponding to the JSON format you want to fetch.
+					Be sure your model is conforming to 'Decodable' protocol.
+				</div>
+				<pre class="prettyprint">
+					<code class="language-swift">
+						import Foundation
+
+						struct User : Codable {
+							&emsp;&emsp;&emsp;let id : Int
+							&emsp;&emsp;&emsp;let name : String
+							&emsp;&emsp;&emsp;let picture : String
+							&emsp;&emsp;&emsp;let age : Int
+						}
+					</code>
+				</pre>
+				<div class="explaination">
+					<h4><b>Step 2 :</b> Create a singleton class</h4>
+					In this class you will implement your methods which are using ZDKit <b>request.fetchData</b> with your own model type.
+				</div>
+				<pre class="prettyprint">
+					<code class="language-swift">
+						import ZDKit
+
+						final class APIService {
+
+							&emsp;&emsp; static let shared = APIService() &emsp;//singleton
+							&emsp;&emsp; private let request = Request() &emsp; // ZDKit public class
+							&emsp;&emsp; private let host = "https://www.yourApiUrl/"
+
+
+							&emsp;&emsp;&emsp;func getUsers(route: String, completion: @escaping([User]?) -> Void) {
+
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let url = URL(string: "\(host)\(route)") else { return }
+
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;request.fetchData(request: URLRequest(url: url), for: [User].self { data in
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let user = data else {
+										&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;completion(nil)
+										&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;completion(user)
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;})
+
+							&emsp;&emsp;&emsp;}
+						}
+					</code>
+				</pre>
+				<div class="explaination">
+					<h4><b>Step 3 :</b> The magic in your Controller </h4>
+					Then in your view controller you just have to call your previously implemented method from the signleton <b>APIService.shared</b>.<br>
+					be sure to unwrap the closure's result and refresh your view with the data.
+				</div>
+				<pre class="prettyprint">
+					<code class="language-swift">
+						import UIKit
+
+						class MyViewController : UIViewController {
+
+							&emsp;&emsp;&emsp;let users : [User]?
+
+							&emsp;&emsp;&emsp;viewDidLoad() {
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;super.viewDidLoad()
+
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;APIService.shared.getUsers(route: "/users", { data in
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let fetch = data else { return }
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;self.users = fetch
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;self.reloadData()
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;})
+							&emsp;&emsp;&emsp;}
+						}
+					</code>
+				</pre>
+			</center>
+		</div>
+
+		<div class="section section-source">
+			<h1><i class="fas fa-code-branch"></i> Source</h1>
+			<div class="text">
+				<b>ZDKit</b> is available on CocoaPods and github.<br> Feel free to send me pull request if you find an issue or a great idea.
+			</div><br>
+			<a href=""><div class="link cocoapods"><img src="https://kieferwiessler.com/img/cocoa.png"></div></a>
+			<a href=""><div class="link github"><img src="https://kieferwiessler.com/img/git.png"></div></a>
+		</div>
+		<div class="footer">
+	        Made with <i class="fas fa-heart"></i>  by <a href="https://kieferwiessler.com">Kiefer Wiessler</a> &copy; MIT License
+	    </div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+	<script src="/js/zdkit.js"></script>
+</body>
