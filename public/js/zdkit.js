@@ -17,8 +17,8 @@
         });
 
 
-        $('.install').on('tap', function () { scrollTo($('.section-install'), 500)})
-        $('.getstarted').on('tap', function () { scrollTo($('.section-documentation'), 0)})
+        $('.install').on('tap', function () { scrollTo($('.section-install'), -40)})
+        $('.getstarted').on('tap', function () { scrollTo($('.section-documentation'), -150)})
         $('.source').on('tap', function () { scrollTo($('.section-source'), 0)})
         $('#logo').on('tap', function () { scrollTo($('.header'), 0)})
 

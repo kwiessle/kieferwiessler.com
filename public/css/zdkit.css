@@ -1,10 +1,9 @@
-
-
 body {
 	background: white;
 	margin: 0;
 	padding: 0;
 }
+
 #zdkit {
 	height: 60%;
 	max-height: 350px;
@@ -15,6 +14,28 @@ body {
 	bottom: 0;
 	margin: auto;
 }
+
+#zdkit1 {
+	height: 200px;
+	display: block;
+}
+
+#opensource {
+	height: 120px;
+	display: inline-block;
+	margin-bottom: 50px;
+}
+
+#wave {
+	background-image: url("https://kieferwiessler.com/img/install.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height:500px;
+	position: relative;
+	bottom: 200px;
+}
+
 .header {
 	background: #c7dbd9;
 	position: relative;
@@ -27,7 +48,6 @@ body {
 	position: relative;
 	top: 750px;
 	padding:  30px;
-	/* background: red; */
 }
 
 .menu-cell a:before {
@@ -51,14 +71,23 @@ body {
 	font-size: 20px;
 	color: white;
 }
+
 b, h1 {
 	font-weight: 500;
 	color: #454545;
-	/* font-size: 30px; */
+}
+
+i, div b {
+	font-weight: 300;
+	color: #6000ff;
+	font-style: normal;
+}
+
+b {
+	font-weight: 500;
 }
 
 h1 i {
-	/* color: #cdd0e0; */
 	color: #505575;
 }
 
@@ -68,6 +97,11 @@ h1 {
 	font-size: 44px;
 	height: 50px;
 	letter-spacing: -4px;
+}
+
+.h1fix {
+	position: relative;
+	bottom: 200px;
 }
 
 h4 {
@@ -80,28 +114,21 @@ h4 {
 	letter-spacing: -2px;
 }
 
-h4 b {
-	color: #949bc6;
+
+
+b i, h4 b {
+	color: #7098D2;
+	font-weight: 400;
 }
 
+.section {
+	position: relative;
+	bottom: 200px;
+}
 .section-install {
 	height: auto;
-	padding-top: 100px;
-	padding-bottom: 250px;
-	margin-bottom: 100px;
-	background-image: url("https://kieferwiessler.com/img/install.svg");
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: relative;
-	top: -190px;
+	margin-bottom: 250px;
 }
-
-.section-install div, .section-install h1 {
-	position: relative;
-	top: 440px;
-}
-
-
 
 .section-documentation {
 	text-align: left;
@@ -112,14 +139,12 @@ h4 b {
 	border-radius: 20px;
 	background: #fff;
 	box-shadow:  0px 0px 10px 1px rgba(0,0,0,0.2);
-	/* border: 1px solid rgba(255, 255, 255, 0.3); */
 	z-index: 10;
 }
 
 .section-source {
 	margin-top: 100px;
 	height: auto;
-	margin-bottom: 200px;
 }
 
 pre {
@@ -130,10 +155,17 @@ pre {
 	width: 94%;
 	font-size: 15px;
 	text-align: left;
-	overflow-x: scroll;
+	/* overflow-x: visible; */
 	white-space: pre-line;
 	margin: 0;
 	box-shadow: inset 0px 0px 60px 12px rgba(0,0,0,0.6);
+}
+
+.prototype {
+	background-color: #393939;
+	border-radius: 5px !important;
+	margin-top: 20px;
+	font-size: 13px;
 }
 
 .text {
@@ -163,8 +195,6 @@ pre:last-child {
 .explaination {
 	width: 90%;
 	background: #eee;
-	/* background: #c7dbd9; */
-	/* background: #c7cbd9; */
 	padding: 5%;
 	font-weight: 300;
 	color: #080808;
@@ -193,6 +223,7 @@ pre:last-child {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 20px;
+	margin-top: 80px;
 }
 
 .link img {
@@ -225,8 +256,6 @@ pre:last-child {
 	margin-left: 10px;
 }
 
-
-
 .kwd, .lit {
 	color: #a45bab !important;
 }
@@ -250,7 +279,6 @@ pre:last-child {
 .footer {
 	background: #fff;
 	border-top: 1px solid #d2d2d2;
-	/* border: none; */
 }
 
 .footer a {

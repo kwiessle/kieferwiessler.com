@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,400" rel="stylesheet">
 	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 	<script src="/js/swift.js"></script>
@@ -25,11 +25,12 @@
 		<div class="header">
 				<img id="zdkit" src="https://kieferwiessler.com/img/zdkit.png">
 		</div>
+		<div id="wave"></div>
 		<div class="section section-install">
 			<h1><i class="fas fa-wrench"></i> Install</h1>
 			<center>
 				<div class="text text-grand">
-					ZDKit is a framework wich simplify the queries between your API and your iOS App.<br>
+					ZDKit is a framework wich simplify the queries between your API and your Swift Application.<br>
 					Sending & Fetching JSON has never been so easy.
 				</div>
 			</center>
@@ -41,20 +42,33 @@
 				pod <b>'ZDKit'</b>
 			</div>
 			<div class="text">
-				ZDKit is powered by Swift 4.2 so ensure that your deployment target is at least '12.0' in your podfile.
+				ZDKit is powered by Swift 4.2 so ensure in your podfile that your deployment target is at least '12.0'.
 			</div>
 		</div>
 	<div class="page-container">
 
+		<h1 class="h1fix"><i class="fas fa-heartbeat"></i> Get Started</h1>
 		<div class="section section-documentation">
 			<center>
 
 
 				<div class="explaination">
-					<h1><i class="fas fa-heartbeat"></i> Get Started</h1>
-					<h4><b>Step 1 :</b> Create a Model </h4>
-					First Create a struct or a class corresponding to the JSON format you want to fetch.
-					Be sure your model is conforming to 'Decodable' protocol.
+
+					<h4><b><i class="fas fa-drafting-compass"></i> Step 1 :</b> Create a Model </h4>
+					First create your model (struct or class) conforming to the Swift's <b>Codable</b> protocol.<br>
+					For a clean code ZDKit will assume your JSON encoding from <b>snake_case</b> to <b>camelCase</b>.<br><br>
+					In this code sample let assume our API endpoint is returning an array of users where each entities are formated like below :
+					<pre class="prettyprint prototype">
+						<code class="language-json">
+							{
+								&emsp;&emsp;&emsp;id : 69006,
+								&emsp;&emsp;&emsp;name : 'Jhon Doe',
+								&emsp;&emsp;&emsp;picture_url : 'https://yourPictureUrl.com',&emsp;//snake_case attribut name
+								&emsp;&emsp;&emsp;age : 25
+							}
+						</code>
+					</pre>
+
 				</div>
 				<pre class="prettyprint">
 					<code class="language-swift">
@@ -63,14 +77,25 @@
 						struct User : Codable {
 							&emsp;&emsp;&emsp;let id : Int
 							&emsp;&emsp;&emsp;let name : String
-							&emsp;&emsp;&emsp;let picture : String
+							&emsp;&emsp;&emsp;let pictureUrl : String&emsp;//Encoded to camelCase
 							&emsp;&emsp;&emsp;let age : Int
 						}
 					</code>
 				</pre>
 				<div class="explaination">
-					<h4><b>Step 2 :</b> Create a singleton class</h4>
-					In this class you will implement your methods which are using ZDKit <b>request.fetchData</b> with your own model type.
+					<h4><b><i class="fab fa-keycdn"></i> Step 2 :</b> Create a singleton class</h4>
+					In this class you will implement your own <b>methods</b> using ZDKit <b>ZDRequest.fetchData()</b>.<br>
+					ZDRequest use <b>&lt;T&gt;</b> generic's power to be reusable anytime.
+					<pre class="prettyprint prototype">
+						<code class="language-swift">
+							func fetchData&lt;T : Codable&gt;(request: URLRequest, for type: T.type, completion: @escaping: (T?) -> Void) -> Void
+						</code>
+					</pre>
+					<ul>
+						<li>request : <i>URLRequest</i> </li>
+						<li>type : <i>&lt;T&gt;.Type</i>
+						<li>completion : <i>&lt;T&gt;?</i>
+					</ul>
 				</div>
 				<pre class="prettyprint">
 					<code class="language-swift">
@@ -79,18 +104,18 @@
 						final class APIService {
 
 							&emsp;&emsp; static let shared = APIService() &emsp;//singleton
-							&emsp;&emsp; private let request = Request() &emsp; // ZDKit public class
+							&emsp;&emsp; private let request = ZDRequest() &emsp; // ZDKit public class
 							&emsp;&emsp; private let host = "https://www.yourApiUrl/"
 
 
-							&emsp;&emsp;&emsp;func getUsers(route: String, completion: @escaping([User]?) -> Void) {
+							&emsp;&emsp;&emsp;func getUsers(route: String, completion: @escaping([User]?) -> Void) -> Void {
 
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let url = URL(string: "\(host)\(route)") else { return }
 
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;request.fetchData(request: URLRequest(url: url), for: [User].self { data in
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let user = data else {
 										&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;completion(nil)
-										&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return
+										&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;completion(user)
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;})
@@ -100,9 +125,9 @@
 					</code>
 				</pre>
 				<div class="explaination">
-					<h4><b>Step 3 :</b> The magic in your Controller </h4>
-					Then in your view controller you just have to call your previously implemented method from the signleton <b>APIService.shared</b>.<br>
-					be sure to unwrap the closure's result and refresh your view with the data.
+					<h4><b><i class="fas fa-hat-wizard"></i> Step 3 :</b> The magic in your Controller </h4>
+					Then in your view controller you just have to call your previously implemented method <b>getUsers()</b> from the signleton <b>APIService.shared</b>.<br>
+					Be safe and make sure to unwrap the data before updating your controller's view.
 				</div>
 				<pre class="prettyprint">
 					<code class="language-swift">
@@ -111,14 +136,15 @@
 						class MyViewController : UIViewController {
 
 							&emsp;&emsp;&emsp;let users : [User]?
+							&emsp;&emsp;&emsp;let API = APIService.shared &emsp;// Singleton reference
 
 							&emsp;&emsp;&emsp;viewDidLoad() {
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;super.viewDidLoad()
 
-								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;APIService.shared.getUsers(route: "/users", { data in
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let fetch = data else { return }
+								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;API.getUsers(route: "/users", { data in
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;guard let fetch = data else { return } &emsp; // Handle your error here.
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;self.users = fetch
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;self.reloadData()
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;self.updateWhatYouNeedTo()
 								&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;})
 							&emsp;&emsp;&emsp;}
 						}
@@ -128,16 +154,21 @@
 		</div>
 
 		<div class="section section-source">
+
 			<h1><i class="fas fa-code-branch"></i> Source</h1>
+			<img id="zdkit1" src="https://kieferwiessler.com/img/zdkit1.png">
 			<div class="text">
-				<b>ZDKit</b> is available on CocoaPods and github.<br> Feel free to send me pull request if you find an issue or a great idea.
+				<b>ZDKit</b> is available on <b>CocoaPods</b> and <b>github</b>.<br> Feel free to send me pull request if you find an issue(s) or if you have any great idea(s).
 			</div><br>
-			<a href=""><div class="link cocoapods"><img src="https://kieferwiessler.com/img/cocoa.png"></div></a>
-			<a href=""><div class="link github"><img src="https://kieferwiessler.com/img/git.png"></div></a>
+			<a href="https://cocoapods.org"><div class="link cocoapods"><img src="https://kieferwiessler.com/img/cocoa.png"></div></a>
+			<a href="https://github.com/kwiessle/ZDKit"><div class="link github"><img src="https://kieferwiessler.com/img/git.png"></div></a>
 		</div>
-		<div class="footer">
-	        Made with <i class="fas fa-heart"></i>  by <a href="https://kieferwiessler.com">Kiefer Wiessler</a> &copy; MIT License
-	    </div>
+		<img id="opensource" src="http://www.openmaint.org/images/opensource-logo.png/image">
+
+
+	</div>
+	<div class="footer">
+		Made & Designed with <i class="fas fa-heart"></i>  by <a href="https://kieferwiessler.com">Kiefer Wiessler</a> &copy; MIT License
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
